@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Lavanderia Sirenetta</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8ff;
+        }
+
+        header {
+            background-color: #1e90ff;
+            color: white;
+            text-align: center;
+            padding: 20px 10px;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+
+        input, textarea, select, button {
+            font-size: 16px;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #1e90ff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #4682b4;
+        }
+
+        .success-message {
+            display: none;
+            color: green;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Feedback Lavanderia Sirenetta</h1>
+    </header>
+
+    <div class="container">
+        <p>La tua opinione è importante per noi! Compila il modulo qui sotto per dirci cosa ne pensi e come possiamo migliorare i nostri servizi.</p>
+
+        <form id="feedback-form">
+            <label for="name">Nome:</label>
+            <input type="text" id="name" name="name" placeholder="Inserisci il tuo nome">
+
+            <label for="feedback">Feedback:</label>
+            <textarea id="feedback" name="feedback" placeholder="Scrivi il tuo feedback" rows="5" required></textarea>
+
+            <label for="improvement">Cosa possiamo migliorare?</label>
+            <textarea id="improvement" name="improvement" placeholder="Scrivi le tue idee" rows="5"></textarea>
+
+            <label for="rating">Valutazione generale:</label>
+            <select id="rating" name="rating" required>
+                <option value="">-- Seleziona un'opzione --</option>
+                <option value="1">1 - Pessimo</option>
+                <option value="2">2 - Insoddisfacente</option>
+                <option value="3">3 - Accettabile</option>
+                <option value="4">4 - Buono</option>
+                <option value="5">5 - Eccellente</option>
+            </select>
+
+            <button type="submit">Invia Feedback</button>
+            <p class="success-message" id="success-message">Feedback inviato con successo!</p>
+        </form>
+    </div>
+
+    <script>
+    document.getElementById('feedback-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const name = document.getElementById('name').value;
+        const feedback = document.getElementById('feedback').value;
+        const improvement = document.getElementById('improvement').value;
+        const rating = document.getElementById('rating').value;
+        const date = new Date().toLocaleString(); // Ottieni la data e ora correnti
+
+        // Crea un oggetto feedback con data e ora
+        const feedbackData = {
+            name: name || "Non specificato",
+            feedback: feedback,
+            improvement: improvement || "Non specificato",
+            rating: rating,
+            date: date
+        };
+
+        // Ottieni i feedback esistenti nel localStorage
+        let existingFeedback = JSON.parse(localStorage.getItem('allFeedbacks')) || [];
+
+        // Aggiungi il nuovo feedback alla lista
+        existingFeedback.push(feedbackData);
+
+        // Salva la lista aggiornata nel localStorage
+        localStorage.setItem('allFeedbacks', JSON.stringify(existingFeedback));
+
+        // Mostra il messaggio di successo
+        document.getElementById('success-message').style.display = 'block';
+
+        // Nascondi il modulo e resetta
+        document.getElementById('feedback-form').reset();
+    });
+</script>
+
+</body>
+</html>
+
+
+</body>
+</html>
