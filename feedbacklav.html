@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Ricevuti</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8ff;
+        }
+
+        header {
+            background-color: #1e90ff;
+            color: white;
+            text-align: center;
+            padding: 20px 10px;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+
+        .feedback-item {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .feedback-item strong {
+            font-weight: bold;
+        }
+
+        .feedback-item p {
+            margin: 5px 0;
+        }
+
+        .feedback-item .date {
+            font-size: 0.9em;
+            color: gray;
+        }
+
+        .button {
+            display: block;
+            text-align: center;
+            background-color: #1e90ff;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .button:hover {
+            background-color: #4682b4;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Feedback Ricevuti</h1>
+    </header>
+
+    <div class="container">
+        <h2>Feedback inviati:</h2>
+
+        <div id="feedback-list"></div>
+
+        <a href="index.html" class="button">Torna al modulo</a>
+    </div>
+
+    <script>
+        // Recupera tutti i feedback salvati nel localStorage
+        const allFeedbacks = JSON.parse(localStorage.getItem('allFeedbacks')) || [];
+
+        // Ottieni l'elemento che conterrà la lista di feedback
+        const feedbackList = document.getElementById('feedback-list');
+
+        // Se ci sono feedback, visualizzali
+        if (allFeedbacks.length > 0) {
+            allFeedbacks.forEach(feedback => {
+                const feedbackItem = document.createElement('div');
+                feedbackItem.classList.add('feedback-item');
+
+                feedbackItem.innerHTML = `
+                    <p><strong>Nome:</strong> ${feedback.name}</p>
+                    <p><strong>Feedback:</strong> ${feedback.feedback}</p>
+                    <p><strong>Cosa possiamo migliorare:</strong> ${feedback.improvement}</p>
+                    <p><strong>Valutazione generale:</strong> ${feedback.rating}</p>
+                    <p class="date"><strong>Data e ora:</strong> ${feedback.date}</p>
+                `;
+
+                feedbackList.appendChild(feedbackItem);
+            });
+        } else {
+            // Se non ci sono feedback, mostra un messaggio
+            feedbackList.innerHTML = '<p>Nessun feedback trovato.</p>';
+        }
+    </script>
+</body>
+</html>
