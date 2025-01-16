@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feedback Ricevuti</title>
+    <title>Feedback Ricevuti - Lavanderia Sirenetta</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -33,34 +33,28 @@
         }
 
         .feedback-item {
-            margin-bottom: 20px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
         }
 
-        .feedback-item strong {
-            font-weight: bold;
+        .feedback-item:last-child {
+            border-bottom: none;
         }
 
-        .feedback-item p {
-            margin: 5px 0;
-        }
-
-        .feedback-item .date {
+        .date {
+            color: #666;
             font-size: 0.9em;
-            color: gray;
         }
 
         .button {
-            display: block;
-            text-align: center;
+            display: inline-block;
+            padding: 10px 15px;
             background-color: #1e90ff;
             color: white;
-            padding: 10px 20px;
             text-decoration: none;
             border-radius: 5px;
-            margin-top: 20px;
+            transition: background-color 0.3s;
         }
 
         .button:hover {
