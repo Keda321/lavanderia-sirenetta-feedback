@@ -67,21 +67,6 @@
             color: green;
             font-weight: bold;
         }
-
-        .feedback-link {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .feedback-link a {
-            text-decoration: none;
-            color: #1e90ff;
-            font-weight: bold;
-        }
-
-        .feedback-link a:hover {
-            color: #4682b4;
-        }
     </style>
 </head>
 <body>
@@ -115,8 +100,6 @@
             <button type="submit">Invia Feedback</button>
             <p class="success-message">Grazie per il tuo feedback!</p>
         </form>
-
-        
     </div>
 
     <script>
@@ -128,7 +111,7 @@
             const improvement = document.getElementById('improvement').value;
             const rating = document.getElementById('rating').value;
 
-            // Salva i dati nel localStorage per trasferirli a un'altra pagina
+            // Salva i dati nel localStorage
             const feedbackData = {
                 name: name || "Non specificato",
                 feedback: feedback,
@@ -136,14 +119,16 @@
                 rating: rating
             };
 
-            localStorage.setItem('feedbackData', JSON.stringify(feedbackData));
+            const allFeedbacks = JSON.parse(localStorage.getItem('allFeedbacks')) || [];
+            allFeedbacks.push(feedbackData);
+            localStorage.setItem('allFeedbacks', JSON.stringify(allFeedbacks));
 
-            // Mostra un messaggio di successo
+            // Mostra il messaggio di successo
             document.querySelector('.success-message').style.display = 'block';
 
-            // Dopo 2 secondi, reindirizza alla pagina dei feedback
+            // Reindirizza dopo 2 secondi
             setTimeout(() => {
-                window.location.href = 'feedback-privato.html';
+                window.location.href = './feedbacklav.html'; // Percorso relativo
             }, 2000);
         });
     </script>
