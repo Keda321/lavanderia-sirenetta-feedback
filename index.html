@@ -98,7 +98,7 @@
             </select>
 
             <button type="submit">Invia Feedback</button>
-            <p class="success-message">Grazie per il tuo feedback!</p>
+            <p class="success-message">Grazie per il tuo feedback! È stato inviato con successo.</p>
         </form>
     </div>
 
@@ -106,30 +106,33 @@
         document.getElementById('feedback-form').addEventListener('submit', function(event) {
             event.preventDefault();
 
+            // Recupera i dati dal modulo
             const name = document.getElementById('name').value;
             const feedback = document.getElementById('feedback').value;
             const improvement = document.getElementById('improvement').value;
             const rating = document.getElementById('rating').value;
+            const date = new Date().toLocaleString(); // Ottieni la data e ora correnti
 
-            // Salva i dati nel localStorage
-            const feedbackData = {
+            // Salva il feedback nel localStorage
+            const newFeedback = {
                 name: name || "Non specificato",
                 feedback: feedback,
                 improvement: improvement || "Non specificato",
-                rating: rating
+                rating: rating,
+                date: date
             };
 
+            // Aggiungi il feedback alla lista esistente nel localStorage
             const allFeedbacks = JSON.parse(localStorage.getItem('allFeedbacks')) || [];
-            allFeedbacks.push(feedbackData);
+            allFeedbacks.push(newFeedback);
             localStorage.setItem('allFeedbacks', JSON.stringify(allFeedbacks));
 
             // Mostra il messaggio di successo
-            document.querySelector('.success-message').style.display = 'block';
+            const successMessage = document.querySelector('.success-message');
+            successMessage.style.display = 'block';
 
-            // Reindirizza dopo 2 secondi
-            setTimeout(() => {
-                window.location.href = './feedbacklav.html'; // Percorso relativo
-            }, 2000);
+            // Resetta il modulo dopo l'invio
+            document.getElementById('feedback-form').reset();
         });
     </script>
 </body>
